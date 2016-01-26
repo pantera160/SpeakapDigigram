@@ -1,0 +1,22 @@
+{
+  "name": {
+    "en-US": "USG Professionals Digigram data"
+  },
+  "icon": "https://yt3.ggpht.com/-m2Q_rYpNHOs/AAAAAAAAAAI/AAAAAAAAAAA/qjz_X89QmXA/s100-c-k-no/photo.jpg",
+  "iconThumbnailUrl": "https://yt3.ggpht.com/-m2Q_rYpNHOs/AAAAAAAAAAI/AAAAAAAAAAA/qjz_X89QmXA/s100-c-k-no/photo.jpg",
+  "permissions": [
+    "send_alerts, get_profiles, get_profile_xid, infinite_limit"
+  ],
+  "entries": [
+    {
+      "position": "main",
+      "devices": "all",
+      "url": "http://panteradev.netai.net/SpeakapDigigram/api/index.php",
+      "label": {
+        "en-US": "Speakap data import"
+      },
+      "icon": "https://yt3.ggpht.com/-m2Q_rYpNHOs/AAAAAAAAAAI/AAAAAAAAAAA/qjz_X89QmXA/s100-c-k-no/photo.jpg"
+    }
+  ]
+}
+
