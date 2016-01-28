@@ -37,16 +37,28 @@ function getUsers()
     $password = "pantsy123";
     try {
         $dbh = new PDO("mysql:host=$hostname;dbname=speakapdump", $username, $password);
+        $error_array = array();
 
         echo("<script>console.log('connected to db');</script>");
 
         $response_decoded = json_decode($curl_response, true);
         foreach($response_decoded as $users)
         {
-            $query = "INSERT into speakapusers('EID', 'email', 'firstname', 'lastname', 'birthday', 'imageurl', 'tel') VALUES ($users[''])";
+            $_username = $users['name'];
+            $stmt = $dbh -> prepare("INSERT into speakapusers('EID', 'email', 'firstname', 'lastname', 'birthday', 'imageurl', 'tel')
+                  VALUES (?, ?, ?, ?, ?, ?, ?)");
+            $stmt->execute(array($users['EID'],$users['primaryEmail'],$_username['firstName'],$_username['lastName'],$users['birthday'],$users['avatarThumbnailUrl'].'/profile-image'));
+            $result = $stmt->rowCount();
+            if($result < 1){
+                echo("<script>console.log('User insert failed for the following user: '+".$users['EID'].");</script>");
+                //TODO log all failed EID's to separate logfile
+                $error_array[] = $users['EID'];
+                $error = true;
+            }
         }
     } catch (PDOException $e) {
-        echo("<script>console.log($e->getMessage());</script>");
+        echo("<script>console.log(".$e->getMessage().");</script>");
+        $error = $e->getMessage();
     }
 }
 
@@ -74,8 +86,13 @@ if (isset($_GET['clicked'])) {
     <a href="index.php?clicked=true"">Sync data</a>
     <div class="errormsg">
         <?php
-        if ($error = true) {
+        if (isset($error)) {
             echo("<p>Something went wrong while connecting to the database. Please contact support.</p>");
+            echo("<div>");
+            if(isset($error_array)){for($i = 0; $i < count($error_array); $i++){
+                echo("The following user was not succesfully added: ".$error_array[$i]);
+            }}
+            echo("</div>");
         }
         ?>
     </div>
