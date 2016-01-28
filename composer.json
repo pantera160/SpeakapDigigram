@@ -1,0 +1,11 @@
+{
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/SpeakapBV/Speakap-SDK.git"
+    }
+  ],
+  "require": {
+    "speakap/sdk": "dev-master"
+  }
+}
