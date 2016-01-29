@@ -64,7 +64,7 @@ function getUsers()
      * @see http://developer.speakap.io/portal/tutorials/frontend_proxy.html#dohandshake
      */
 
-        // Wait until we've completed our handshake
+    // Wait until we've completed our handshake
     Speakap.doHandshake.then(function () {
 
         // Let's figure out who we are and show SOME information about the logged in user.
@@ -80,7 +80,11 @@ function getUsers()
 
         });
         console.log("calling ajax");
-        Speakap.ajax("users", {
+        //Call speakap API to return all users in network
+        //Equivalent to https://api.speakap.io/networks/:eid/users/
+        //Speakap will call this request within the scope of the application
+        //@Return array of Speakap user recources
+        Speakap.ajax("/users/", {
             success: function (speakapusers, status, jqXHR) {
                 console.log("ajax called");
                 console.log(speakapusers);
